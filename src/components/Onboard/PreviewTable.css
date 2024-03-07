@@ -1,0 +1,18 @@
+.MuiTableHead-root {
+    background-color: #f0f0f0;
+  }
+  
+  .MuiTableCell-head {
+    font-weight: bold;
+      white-space: nowrap; 
+  }
+  
+  .MuiTableCell-root.MuiTableCell-head:first-child {
+    font-weight: normal;
+    color: black;
+    background-color: white;
+  }
+  .MuiTableContainer-root {
+    overflow-x: auto; 
+  }
+  
