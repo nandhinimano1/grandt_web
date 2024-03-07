@@ -3,7 +3,7 @@ scanner(
   {
     serverUrl: 'http://localhost:9000',
     options: {
-      'sonar.token': 'sqa_77de266adb07256b7655fe86c9d4b03c5e0af632',
+      'sonar.token': process.env.SONARQUBE_TOKEN,
       'sonar.projectName': 'grandt',
       'sonar.projectDescription': 'test sonarqube ...',
       'sonar.sourceEncoding': 'UTF-8',
