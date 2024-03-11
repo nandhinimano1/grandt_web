@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grandt_web
+  namespace: namespace-workflow-1710167891507
+spec:
+  type: LoadBalancer
+  selector:
+    app: grandt_web
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
