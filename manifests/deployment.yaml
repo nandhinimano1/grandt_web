@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grandt_web
+  labels:
+    app: grandt_web
+  namespace: namespace-workflow-1710167891507
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grandt_web
+  template:
+    metadata:
+      labels:
+        app: grandt_web
+    spec:
+      containers:
+        - name: grandt_web
+          image: acrworkflow1710167891507.azurecr.io/image-workflow-1710167891507:latest
+          ports:
+            - containerPort: 3000
