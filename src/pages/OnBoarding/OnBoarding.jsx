@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { RadioGroup, FormControlLabel, Radio, FormControl, FormLabel, Container, Grid } from '@mui/material';
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormControl,
+  FormLabel,
+  Container,
+  Grid,
+} from '@mui/material';
 import './OnBoarding.css';
-import EntityForm from '../../components/Onboard/EntityForm';
+import EntityForm from '../../components/EntityForm';
 import ClientEngagementForm from '../../components/Onboard/ClientEngagementForm';
 import BusinessRelationshipForm from '../../components/Onboard/BusinessRelationshipForm';
 import PersonnelRelationshipForm from '../../components/Onboard/PersonnelRelationshipForm';
 
 function OnBoarding() {
   const [formType, setFormType] = useState('entity');
-  const handleRadioChange = e => {
+  const handleRadioChange = (e) => {
     setFormType(e.target.value);
   };
   const radioGroup = [
@@ -34,10 +42,23 @@ function OnBoarding() {
           }}
         >
           <FormControl component='fieldset' fullWidth>
-            <FormLabel component='legend'>Select File Type to be Uploaded</FormLabel>
-            <RadioGroup row aria-label='fileType' name='fileType' value={formType} onChange={handleRadioChange}>
+            <FormLabel component='legend'>
+              Select File Type to be Uploaded
+            </FormLabel>
+            <RadioGroup
+              row
+              aria-label='fileType'
+              name='fileType'
+              value={formType}
+              onChange={handleRadioChange}
+            >
               {radioGroup.map(({ label, value }) => (
-                <FormControlLabel key={`index${label}`} value={value} control={<Radio />} label={label} />
+                <FormControlLabel
+                  key={`index${label}`}
+                  value={value}
+                  control={<Radio />}
+                  label={label}
+                />
               ))}
             </RadioGroup>
           </FormControl>

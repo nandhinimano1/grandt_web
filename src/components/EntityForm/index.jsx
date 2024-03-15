@@ -1,7 +1,16 @@
 import React, { useEffect, useState, memo } from 'react';
-import { TextField, Button, FormControl, Container, Typography, InputLabel, MenuItem, Grid } from '@mui/material';
+import {
+  TextField,
+  Button,
+  FormControl,
+  Container,
+  Typography,
+  InputLabel,
+  MenuItem,
+  Grid,
+} from '@mui/material';
 import Papa from 'papaparse';
-import PreviewTable from './PreviewTable';
+import PreviewTable from '../Onboard/PreviewTable';
 import apiservice from '../../helper/apiservice';
 
 const MemoizedPreviewTable = memo(PreviewTable);
@@ -24,34 +33,27 @@ const EntityForm = () => {
     try {
       await apiservice
         .getmemberfirm()
-        .then(response => setMemberFirms(response.data))
-        .catch(error => console.log(error));
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
+        .then((response) => setMemberFirms(response.data))
+        .catch((error) => {});
+    } catch (error) {}
   };
 
-  const getProcessedBy = async memberFirm => {
+  const getProcessedBy = async (memberFirm) => {
     try {
       await apiservice
         .getprocessedby(memberFirm)
-        .then(response => setProcessedBy(response.data))
-        .catch(error => console.log(error));
-    } catch (error) {
-      console.log(error);
-
-      alert(error);
-    }
+        .then((response) => setProcessedBy(response.data))
+        .catch((error) => {});
+    } catch (error) {}
   };
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEntityData({ ...entityData, [name]: value });
     if (name === 'memberFirm') getProcessedBy(value);
   };
 
-  const readFileData = file => {
+  const readFileData = (file) => {
     const reader = new FileReader();
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true });
@@ -60,7 +62,7 @@ const EntityForm = () => {
     reader.readAsText(file);
   };
 
-  const handleFileChange = event => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const fileType = file.name.split('.').pop();
@@ -76,7 +78,7 @@ const EntityForm = () => {
     }
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!fileError && entityData.fileName) {
       try {
@@ -100,16 +102,25 @@ const EntityForm = () => {
   return (
     <Container component='main' sx={{ marginTop: '10%', marginBottom: '10%' }}>
       <Grid container>
-        <FormControl component='form' onSubmit={e => handleSubmit(e)} fullWidth autoComplete='off'>
+        <FormControl
+          component='form'
+          onSubmit={(e) => handleSubmit(e)}
+          fullWidth
+          autoComplete='off'
+        >
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Member Firm</InputLabel>
             <TextField
+              inputProps={{
+                id: 'memberFirmSelect',
+                'data-testid': 'memberFirmSelect',
+              }}
               select
               fullWidth
               id='memberFirm'
               name='memberFirm'
               value={entityData.memberFirm}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e)}
               margin='normal'
               variant='outlined'
               required
@@ -124,6 +135,10 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received From</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedFromInput',
+                'data-testid': 'receivedFromInput',
+              }}
               margin='normal'
               fullWidth
               id='receivedFrom'
@@ -138,6 +153,10 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Processed By</InputLabel>
             <TextField
+              inputProps={{
+                id: 'processedByInput',
+                'data-testid': 'processedByInput',
+              }}
               margin='normal'
               select
               fullWidth
@@ -158,6 +177,10 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received Date</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedDate',
+                'data-testid': 'receivedDate',
+              }}
               margin='normal'
               fullWidth
               id='receivedDate'
@@ -197,17 +220,31 @@ const EntityForm = () => {
               }}
             >
               <Button variant='contained' component='label' color='primary'>
-                Choose File <input type='file' hidden onChange={handleFileChange} />
+                Choose File
+                <input type='file' hidden onChange={handleFileChange} />
               </Button>
             </Grid>
 
             <Grid item xs={6} sm={6} md={4} lg={4} xl={4}>
-              <Typography variant='body1' sx={{ flexGrow: 2, textAlign: 'left' }}>
+              <Typography
+                variant='body1'
+                sx={{ flexGrow: 2, textAlign: 'left' }}
+                id='fileName'
+              >
                 {entityData.fileName || 'No file chosen'}
               </Typography>
             </Grid>
 
-            <Grid item container spacing={2} xs={12} sm={6} md={4} lg={4} xl={4}>
+            <Grid
+              item
+              container
+              spacing={2}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={4}
+            >
               <Grid item xs={12}>
                 <Button
                   variant='outlined'
@@ -252,7 +289,9 @@ const EntityForm = () => {
         </Grid>
       )}
       <div style={{ mb: 4 }}>
-        {showPreview && entityData.fileName && <MemoizedPreviewTable tableData={data} showrowscount showhash />}
+        {showPreview && entityData.fileName && (
+          <MemoizedPreviewTable tableData={data} showrowscount showhash />
+        )}
       </div>
     </Container>
   );
