@@ -11,14 +11,20 @@ import {
   TextField,
   MenuItem,
 } from '@mui/material';
-import apiservice from '../../helper/apiservice';
-import './ResultSummary.css';
+import apiservice from '../../../helper/apiservice';
+import '../ResultSummary.css';
 
 function Filter(props) {
-  const { handleInputChange, handlessetfiletype, filetype, entityData, radioGroup } = props;
+  const {
+    handleInputChange,
+    handlessetfiletype,
+    filetype,
+    entityData,
+    radioGroup,
+  } = props;
   const [memberFirms, setMemberFirms] = useState([]);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     console.log(e.target.value);
   };
 
@@ -26,8 +32,8 @@ function Filter(props) {
     try {
       await apiservice
         .getmemberfirm()
-        .then(response => setMemberFirms(response.data))
-        .catch(error => console.log(error));
+        .then((response) => setMemberFirms(response.data))
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
       alert(error);
@@ -39,7 +45,12 @@ function Filter(props) {
   }, []);
 
   return (
-    <FormControl component='form' onSubmit={e => handleSubmit(e)} fullWidth autoComplete='off'>
+    <FormControl
+      component='form'
+      onSubmit={(e) => handleSubmit(e)}
+      fullWidth
+      autoComplete='off'
+    >
       <Grid container spacing={8}>
         <Grid item xs={12} container spacing={2}>
           <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
@@ -122,17 +133,28 @@ function Filter(props) {
             <FormControl
               component='fieldset'
               fullWidth
-              sx={{ border: 1, borderRadius: 1, borderColor: '#EBEBE4', padding: 2, height: 'fit-content' }}
+              sx={{
+                border: 1,
+                borderRadius: 1,
+                borderColor: '#EBEBE4',
+                padding: 2,
+                height: 'fit-content',
+              }}
             >
               <RadioGroup
                 row
                 aria-label='fileType'
                 name='fileType'
                 value={filetype}
-                onChange={e => handlessetfiletype(e.target.value)}
+                onChange={(e) => handlessetfiletype(e.target.value)}
               >
                 {radioGroup.map(({ label, value }, index) => (
-                  <FormControlLabel key={`index${label}`} value={value} control={<Radio />} label={label} />
+                  <FormControlLabel
+                    key={`index${label}`}
+                    value={value}
+                    control={<Radio />}
+                    label={label}
+                  />
                 ))}
               </RadioGroup>
             </FormControl>

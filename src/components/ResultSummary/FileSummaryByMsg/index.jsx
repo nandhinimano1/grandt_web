@@ -1,14 +1,30 @@
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { RadioGroup, FormControlLabel, Radio, Container, Grid, Button, Typography, Divider } from '@mui/material';
-import './ResultSummary.css';
-import PreviewTable from '../Onboard/PreviewTable';
-import Filter from './Filter';
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Container,
+  Grid,
+  Button,
+  Typography,
+  Divider,
+} from '@mui/material';
+import '../ResultSummary.css';
+import PreviewTable from '../../PreviewTable';
+import Filter from '../Filter';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
 function FileSummaryByMsg(props) {
-  const { setRendercomponent, handleInputChange, handlessetfiletype, filetype, entityData, radioGroup } = props;
+  const {
+    setRendercomponent,
+    handleInputChange,
+    handlessetfiletype,
+    filetype,
+    entityData,
+    radioGroup,
+  } = props;
   const [msgType, setMsgType] = useState('all');
 
   return (
@@ -42,7 +58,7 @@ function FileSummaryByMsg(props) {
               },
             ]}
             navigation
-            onclickformType={id => {}}
+            onclickformType={(id) => {}}
           />
         </Grid>
         <Grid item xs={12} className='alignCenter'>
@@ -77,7 +93,7 @@ function FileSummaryByMsg(props) {
               aria-label='fileType'
               name='fileType'
               value={msgType}
-              onChange={e => {
+              onChange={(e) => {
                 setMsgType(e.target.value);
               }}
             >
@@ -86,7 +102,12 @@ function FileSummaryByMsg(props) {
                 { value: 'warnings', label: 'Warnings' },
                 { value: 'errors', label: 'Errors' },
               ].map(({ label, value }, index) => (
-                <FormControlLabel key={`radio-${label}`} value={value} control={<Radio />} label={label} />
+                <FormControlLabel
+                  key={`radio-${label}`}
+                  value={value}
+                  control={<Radio />}
+                  label={label}
+                />
               ))}
             </RadioGroup>
           </Grid>
@@ -119,7 +140,7 @@ function FileSummaryByMsg(props) {
                   },
                 ]}
                 navigation
-                onclickformType={id => {
+                onclickformType={(id) => {
                   setRendercomponent('RecordswithError');
                 }}
               />

@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Grid, Button, Typography, Divider } from '@mui/material';
-import './ResultSummary.css';
-import PreviewTable from '../Onboard/PreviewTable';
-import Filter from './Filter';
-import WarningsErrorsFound from './WarningsErrorsFound';
+import '../ResultSummary.css';
+import PreviewTable from '../../PreviewTable';
+import Filter from '../Filter';
+import WarningsErrorsFound from '../WarningsErrorsFound/WarningsErrorsFound';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 const warningsErrors = [
@@ -18,9 +18,16 @@ const warningsErrors = [
   { code: 'DRC-106', message: '' },
 ];
 function FileSummaryRecordswitherror(props) {
-  const { setRendercomponent, handleInputChange, handlessetfiletype, filetype, entityData, radioGroup } = props;
+  const {
+    setRendercomponent,
+    handleInputChange,
+    handlessetfiletype,
+    filetype,
+    entityData,
+    radioGroup,
+  } = props;
 
-  const handleSelect = warningError => {
+  const handleSelect = (warningError) => {
     console.log(warningError);
   };
   return (
@@ -53,7 +60,7 @@ function FileSummaryRecordswitherror(props) {
                 Fail: 2817,
               },
             ]}
-            onclickformType={id => {}}
+            onclickformType={(id) => {}}
           />
         </Grid>
         <Grid item xs={12} className='alignCenter'>
@@ -76,7 +83,10 @@ function FileSummaryRecordswitherror(props) {
             <Typography>Warnings/Errors found</Typography>
           </Grid>
           <Grid item xs={8}>
-            <WarningsErrorsFound warningsErrors={warningsErrors} onSelect={handleSelect} />
+            <WarningsErrorsFound
+              warningsErrors={warningsErrors}
+              onSelect={handleSelect}
+            />
           </Grid>
           <Grid ite xs={1}></Grid>
           <Grid item xs={3}>
@@ -103,7 +113,7 @@ function FileSummaryRecordswitherror(props) {
                   Type: 'Warning',
                 },
               ]}
-              onclickformType={id => {
+              onclickformType={(id) => {
                 setRendercomponent('RecordswithError');
               }}
             />
@@ -151,7 +161,7 @@ function FileSummaryRecordswitherror(props) {
                   'Field content': '',
                 },
               ]}
-              onclickformType={id => {
+              onclickformType={(id) => {
                 setRendercomponent('RecordswithError');
               }}
               editableFields={['Field content']}

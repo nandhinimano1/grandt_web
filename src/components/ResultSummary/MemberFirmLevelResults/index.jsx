@@ -1,40 +1,52 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Grid, Button, Typography } from '@mui/material';
-import apiservice from '../../helper/apiservice';
-import './ResultSummary.css';
-import PreviewTable from '../Onboard/PreviewTable';
-import Filter from './Filter';
+import apiservice from '../../../helper/apiservice';
+import '../ResultSummary.css';
+import PreviewTable from '../../PreviewTable';
+import Filter from '../Filter';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
 function MemberFirmLevelResults(props) {
-  const { setRendercomponent, handleInputChange, handlessetfiletype, filetype, entityData, radioGroup } = props;
+  const {
+    setRendercomponent,
+    handleInputChange,
+    handlessetfiletype,
+    filetype,
+    entityData,
+    radioGroup,
+  } = props;
   const [filetypedetailsView, setFiletypedetailsView] = useState([]);
 
-  useEffect(() => {
-    const getresultSummary = async () => {
-      try {
-        await apiservice
-          .getresultsummary(filetype)
-          .then(response => {
-            let responseData = response.data;
-            setFiletypedetailsView(responseData.find(i => i.form === filetype)?.details);
-          })
-          .catch(error => console.log(error));
-      } catch (error) {
-        console.log(error);
-        alert(error);
-      }
-    };
-    getresultSummary();
+  const getresultSummary = useCallback(async () => {
+    try {
+      await apiservice
+        .getresultsummary(filetype)
+        .then((response) => {
+          let responseData = response.data;
+          setFiletypedetailsView(
+            responseData.find((i) => i.type === filetype)?.details
+          );
+        })
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   }, [filetype]);
+
+  useEffect(() => {
+    getresultSummary();
+  }, [filetype, getresultSummary]);
 
   return (
     <Container comonent='main'>
       <Grid container spacing={5} marginBottom={8}>
         <Grid item xs={12}>
-          <h1 className='alignCenter'>Data Profile - Member firm file level results</h1>
+          <h1 className='alignCenter'>
+            Data Profile - Member firm file level results
+          </h1>
         </Grid>
         <Grid item xs={12}>
           <Filter
@@ -52,8 +64,9 @@ function MemberFirmLevelResults(props) {
         </Grid>
         <Grid item xs={12}>
           <Typography>
-            Selection result summary: (Click <span style={{ textDecoration: 'underline' }}>Underline</span> button to
-            expand:)
+            Selection result summary: (Click{' '}
+            <span style={{ textDecoration: 'underline' }}>Underline</span>{' '}
+            button to expand:)
           </Typography>
         </Grid>
         <Grid item xs={12} container>

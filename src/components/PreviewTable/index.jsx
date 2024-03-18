@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 
 function PreviewTable({
@@ -14,7 +22,10 @@ function PreviewTable({
 }) {
   const [filteredTableData, setFilteredTableData] = useState([]);
   const [headers, setHeaders] = useState([]);
-  const [editingCell, setEditingCell] = useState({ rowIndex: null, fieldName: null });
+  const [editingCell, setEditingCell] = useState({
+    rowIndex: null,
+    fieldName: null,
+  });
 
   const handleKeyPress = (event, value) => {
     if (event.key === 'Enter') {
@@ -39,8 +50,11 @@ function PreviewTable({
   };
 
   useEffect(() => {
-    const formattedTableData = tableData.filter(row => row && Object.keys(row).length > 0);
-    const headers = formattedTableData.length > 0 ? Object.keys(formattedTableData[0]) : [];
+    const formattedTableData = tableData.filter(
+      (row) => row && Object.keys(row).length > 0
+    );
+    const headers =
+      formattedTableData.length > 0 ? Object.keys(formattedTableData[0]) : [];
     setFilteredTableData(formattedTableData);
     setHeaders(headers);
   }, [tableData]);
@@ -64,8 +78,8 @@ function PreviewTable({
             {showhash && <TableCell>#</TableCell>}
             {!ignoretitle &&
               headers
-                .filter(header => header !== 'details')
-                .map(header => <TableCell key={header}>{header}</TableCell>)}
+                .filter((header) => header !== 'details')
+                .map((header) => <TableCell key={header}>{header}</TableCell>)}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,22 +90,30 @@ function PreviewTable({
                   {rowIndex + 1}
                 </TableCell>
               )}
-              {headers.map(header => {
+              {headers.map((header) => {
                 if (header !== 'details') {
                   const isEditable = editableFields?.includes(header);
-                  const isEditing = isEditable && editingCell.rowIndex === rowIndex && editingCell.fieldName === header;
+                  const isEditing =
+                    isEditable &&
+                    editingCell.rowIndex === rowIndex &&
+                    editingCell.fieldName === header;
                   const cellContent = isEditing ? (
                     <input
                       type='text'
                       defaultValue={row[header]}
-                      onBlur={event => handleCellUpdate(event, rowIndex, header)}
+                      onBlur={(event) =>
+                        handleCellUpdate(event, rowIndex, header)
+                      }
                     />
                   ) : (
                     <span onClick={() => handleCellClick(rowIndex, header)}>
                       {row[header] === '' ? 'click to edit data' : row[header]}
                     </span>
                   );
-                  if (addnavigationall || (navigation && header === headers[0])) {
+                  if (
+                    addnavigationall ||
+                    (navigation && header === headers[0])
+                  ) {
                     return (
                       <TableCell key={`${rowIndex}_${header}`}>
                         <button
@@ -102,15 +124,23 @@ function PreviewTable({
                             padding: 0,
                             cursor: 'pointer',
                           }}
-                          onClick={() => onclickformType(row[Object.keys(row)[0]])}
-                          onKeyDown={event => handleKeyPress(event, row[header])}
+                          onClick={() =>
+                            onclickformType(row[Object.keys(row)[0]])
+                          }
+                          onKeyDown={(event) =>
+                            handleKeyPress(event, row[header])
+                          }
                         >
                           {cellContent}
                         </button>
                       </TableCell>
                     );
                   }
-                  return <TableCell key={`${rowIndex}_${header}`}>{cellContent}</TableCell>;
+                  return (
+                    <TableCell key={`${rowIndex}_${header}`}>
+                      {cellContent}
+                    </TableCell>
+                  );
                 }
                 return null;
               })}

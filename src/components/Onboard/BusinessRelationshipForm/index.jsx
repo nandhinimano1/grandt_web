@@ -10,8 +10,8 @@ import {
   Grid,
 } from '@mui/material';
 import Papa from 'papaparse';
-import PreviewTable from './PreviewTable';
-import apiservice from '../../helper/apiservice';
+import PreviewTable from '../../PreviewTable';
+import apiservice from '../../../helper/apiservice';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
@@ -34,11 +34,8 @@ const BusinessRelationshipForm = () => {
       await apiservice
         .getmemberfirm()
         .then((response) => setMemberFirms(response.data))
-        .catch((error) => console.log(error));
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
+        .catch((error) => {});
+    } catch (error) {}
   };
 
   const getProcessedBy = async (memberFirm) => {
@@ -46,12 +43,8 @@ const BusinessRelationshipForm = () => {
       await apiservice
         .getprocessedby(memberFirm)
         .then((response) => setProcessedBy(response.data))
-        .catch((error) => console.log(error));
-    } catch (error) {
-      console.log(error);
-
-      alert(error);
-    }
+        .catch((error) => {});
+    } catch (error) {}
   };
 
   const handleInputChange = (event) => {
@@ -118,12 +111,16 @@ const BusinessRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Member Firm</InputLabel>
             <TextField
+              inputProps={{
+                id: 'memberFirmSelect',
+                'data-testid': 'memberFirmSelect',
+              }}
               select
               fullWidth
               id='memberFirm'
               name='memberFirm'
               value={entityData.memberFirm}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e)}
               margin='normal'
               variant='outlined'
               required
@@ -138,6 +135,10 @@ const BusinessRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received From</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedFromInput',
+                'data-testid': 'receivedFromInput',
+              }}
               margin='normal'
               fullWidth
               id='receivedFrom'
@@ -152,6 +153,10 @@ const BusinessRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Processed By</InputLabel>
             <TextField
+              inputProps={{
+                id: 'processedByInput',
+                'data-testid': 'processedByInput',
+              }}
               margin='normal'
               select
               fullWidth
@@ -172,6 +177,10 @@ const BusinessRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received Date</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedDate',
+                'data-testid': 'receivedDate',
+              }}
               margin='normal'
               fullWidth
               id='receivedDate'
@@ -211,7 +220,7 @@ const BusinessRelationshipForm = () => {
               }}
             >
               <Button variant='contained' component='label' color='primary'>
-                Choose File{' '}
+                Choose File
                 <input type='file' hidden onChange={handleFileChange} />
               </Button>
             </Grid>
@@ -220,6 +229,8 @@ const BusinessRelationshipForm = () => {
               <Typography
                 variant='body1'
                 sx={{ flexGrow: 2, textAlign: 'left' }}
+                id='fileName'
+                data-testid='filechosen'
               >
                 {entityData.fileName || 'No file chosen'}
               </Typography>

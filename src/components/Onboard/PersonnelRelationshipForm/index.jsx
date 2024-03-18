@@ -10,12 +10,12 @@ import {
   Grid,
 } from '@mui/material';
 import Papa from 'papaparse';
-import PreviewTable from '../Onboard/PreviewTable';
-import apiservice from '../../helper/apiservice';
+import PreviewTable from '../../PreviewTable';
+import apiservice from '../../../helper/apiservice';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
-const EntityForm = () => {
+const PersonnelRelationshipForm = () => {
   const [entityData, setEntityData] = useState({
     memberFirm: '',
     receivedFrom: '',
@@ -34,8 +34,11 @@ const EntityForm = () => {
       await apiservice
         .getmemberfirm()
         .then((response) => setMemberFirms(response.data))
-        .catch((error) => {});
-    } catch (error) {}
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   };
 
   const getProcessedBy = async (memberFirm) => {
@@ -43,8 +46,12 @@ const EntityForm = () => {
       await apiservice
         .getprocessedby(memberFirm)
         .then((response) => setProcessedBy(response.data))
-        .catch((error) => {});
-    } catch (error) {}
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+
+      alert(error);
+    }
   };
 
   const handleInputChange = (event) => {
@@ -111,16 +118,12 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Member Firm</InputLabel>
             <TextField
-              inputProps={{
-                id: 'memberFirmSelect',
-                'data-testid': 'memberFirmSelect',
-              }}
               select
               fullWidth
               id='memberFirm'
               name='memberFirm'
               value={entityData.memberFirm}
-              onChange={(e) => handleInputChange(e)}
+              onChange={handleInputChange}
               margin='normal'
               variant='outlined'
               required
@@ -135,10 +138,6 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received From</InputLabel>
             <TextField
-              inputProps={{
-                id: 'receivedFromInput',
-                'data-testid': 'receivedFromInput',
-              }}
               margin='normal'
               fullWidth
               id='receivedFrom'
@@ -153,10 +152,6 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Processed By</InputLabel>
             <TextField
-              inputProps={{
-                id: 'processedByInput',
-                'data-testid': 'processedByInput',
-              }}
               margin='normal'
               select
               fullWidth
@@ -177,10 +172,6 @@ const EntityForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received Date</InputLabel>
             <TextField
-              inputProps={{
-                id: 'receivedDate',
-                'data-testid': 'receivedDate',
-              }}
               margin='normal'
               fullWidth
               id='receivedDate'
@@ -220,7 +211,7 @@ const EntityForm = () => {
               }}
             >
               <Button variant='contained' component='label' color='primary'>
-                Choose File
+                Choose File{' '}
                 <input type='file' hidden onChange={handleFileChange} />
               </Button>
             </Grid>
@@ -229,7 +220,6 @@ const EntityForm = () => {
               <Typography
                 variant='body1'
                 sx={{ flexGrow: 2, textAlign: 'left' }}
-                id='fileName'
               >
                 {entityData.fileName || 'No file chosen'}
               </Typography>
@@ -296,5 +286,4 @@ const EntityForm = () => {
     </Container>
   );
 };
-
-export default EntityForm;
+export default PersonnelRelationshipForm;

@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Divider, Grid, Typography } from '@mui/material';
-import apiservice from '../../helper/apiservice';
-import './ResultSummary.css';
-import PreviewTable from '../Onboard/PreviewTable';
-import Filter from './Filter';
+import apiservice from '../../../helper/apiservice';
+import '../ResultSummary.css';
+import PreviewTable from '../../PreviewTable';
+import Filter from '../Filter';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
@@ -27,8 +27,10 @@ function MemberFirmSummary(props) {
     try {
       await apiservice
         .getrcvd()
-        .then(response => setRcvd(response.data))
-        .catch(error => console.log(error));
+        .then((response) => {
+          setRcvd(response.data);
+        })
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
       alert(error);
@@ -44,7 +46,7 @@ function MemberFirmSummary(props) {
       try {
         await apiservice
           .getresultsummary(filetype)
-          .then(response => {
+          .then((response) => {
             setFormtypecount(response.data);
             const aggregatedData = response.data.reduce(
               (acc, curr) => {
@@ -57,7 +59,7 @@ function MemberFirmSummary(props) {
             );
             setFilescount([aggregatedData]);
           })
-          .catch(error => console.log(error));
+          .catch((error) => console.log(error));
       } catch (error) {
         console.log(error);
         alert(error);
@@ -70,7 +72,9 @@ function MemberFirmSummary(props) {
     <Container comonent='main'>
       <Grid container spacing={5} marginBottom={8}>
         <Grid item xs={12}>
-          <h1 className='alignCenter'>Data Profile - Member firm result summary</h1>
+          <h1 className='alignCenter'>
+            Data Profile - Member firm result summary
+          </h1>
         </Grid>
         <Grid item xs={12}>
           <Filter
@@ -81,7 +85,7 @@ function MemberFirmSummary(props) {
             radioGroup={radioGroup}
           />
         </Grid>
-        <Grid item xs={12} className='aligncenter'>
+        <Grid item xs={12} className='alignCenter'>
           <Button variant='outlined' onClick={() => resetEntityData()}>
             Clear Selection
           </Button>
@@ -94,8 +98,9 @@ function MemberFirmSummary(props) {
         </Grid>
         <Grid item xs={12}>
           <Typography>
-            Selection result summary: (Click <span style={{ textDecoration: 'underline' }}>Underline</span> button to
-            expand:)
+            Selection result summary: (Click{' '}
+            <span style={{ textDecoration: 'underline' }}>Underline</span>{' '}
+            button to expand:)
           </Typography>
         </Grid>
         <Grid item xs={12} container>
@@ -109,7 +114,7 @@ function MemberFirmSummary(props) {
               ignoretitle
               expand
               addnavigationall
-              onclickformType={filetype => {
+              onclickformType={(filetype) => {
                 setRendercomponent('MemberFirmLevelResults');
                 handlessetfiletype(filetype);
               }}

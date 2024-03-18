@@ -9,7 +9,7 @@ import {
   Grid,
 } from '@mui/material';
 import './OnBoarding.css';
-import EntityForm from '../../components/EntityForm';
+import EntityForm from '../../components/Onboard/EntityForm';
 import ClientEngagementForm from '../../components/Onboard/ClientEngagementForm';
 import BusinessRelationshipForm from '../../components/Onboard/BusinessRelationshipForm';
 import PersonnelRelationshipForm from '../../components/Onboard/PersonnelRelationshipForm';

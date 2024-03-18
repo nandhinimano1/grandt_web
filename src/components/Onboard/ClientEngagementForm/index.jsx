@@ -1,12 +1,21 @@
 import React, { useEffect, useState, memo } from 'react';
-import { TextField, Button, FormControl, Container, Typography, InputLabel, MenuItem, Grid } from '@mui/material';
+import {
+  TextField,
+  Button,
+  FormControl,
+  Container,
+  Typography,
+  InputLabel,
+  MenuItem,
+  Grid,
+} from '@mui/material';
 import Papa from 'papaparse';
-import PreviewTable from './PreviewTable';
-import apiservice from '../../helper/apiservice';
+import PreviewTable from '../../PreviewTable';
+import apiservice from '../../../helper/apiservice';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 
-const PersonnelRelationshipForm = () => {
+const ClientEngagementForm = () => {
   const [entityData, setEntityData] = useState({
     memberFirm: '',
     receivedFrom: '',
@@ -24,20 +33,20 @@ const PersonnelRelationshipForm = () => {
     try {
       await apiservice
         .getmemberfirm()
-        .then(response => setMemberFirms(response.data))
-        .catch(error => console.log(error));
+        .then((response) => setMemberFirms(response.data))
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
       alert(error);
     }
   };
 
-  const getProcessedBy = async memberFirm => {
+  const getProcessedBy = async (memberFirm) => {
     try {
       await apiservice
         .getprocessedby(memberFirm)
-        .then(response => setProcessedBy(response.data))
-        .catch(error => console.log(error));
+        .then((response) => setProcessedBy(response.data))
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
 
@@ -45,13 +54,13 @@ const PersonnelRelationshipForm = () => {
     }
   };
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setEntityData({ ...entityData, [name]: value });
     if (name === 'memberFirm') getProcessedBy(value);
   };
 
-  const readFileData = file => {
+  const readFileData = (file) => {
     const reader = new FileReader();
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true });
@@ -60,7 +69,7 @@ const PersonnelRelationshipForm = () => {
     reader.readAsText(file);
   };
 
-  const handleFileChange = event => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       const fileType = file.name.split('.').pop();
@@ -76,7 +85,7 @@ const PersonnelRelationshipForm = () => {
     }
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!fileError && entityData.fileName) {
       try {
@@ -100,7 +109,12 @@ const PersonnelRelationshipForm = () => {
   return (
     <Container component='main' sx={{ marginTop: '10%', marginBottom: '10%' }}>
       <Grid container>
-        <FormControl component='form' onSubmit={e => handleSubmit(e)} fullWidth autoComplete='off'>
+        <FormControl
+          component='form'
+          onSubmit={(e) => handleSubmit(e)}
+          fullWidth
+          autoComplete='off'
+        >
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Member Firm</InputLabel>
             <TextField
@@ -197,17 +211,30 @@ const PersonnelRelationshipForm = () => {
               }}
             >
               <Button variant='contained' component='label' color='primary'>
-                Choose File <input type='file' hidden onChange={handleFileChange} />
+                Choose File{' '}
+                <input type='file' hidden onChange={handleFileChange} />
               </Button>
             </Grid>
 
             <Grid item xs={6} sm={6} md={4} lg={4} xl={4}>
-              <Typography variant='body1' sx={{ flexGrow: 2, textAlign: 'left' }}>
+              <Typography
+                variant='body1'
+                sx={{ flexGrow: 2, textAlign: 'left' }}
+              >
                 {entityData.fileName || 'No file chosen'}
               </Typography>
             </Grid>
 
-            <Grid item container spacing={2} xs={12} sm={6} md={4} lg={4} xl={4}>
+            <Grid
+              item
+              container
+              spacing={2}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={4}
+            >
               <Grid item xs={12}>
                 <Button
                   variant='outlined'
@@ -252,9 +279,12 @@ const PersonnelRelationshipForm = () => {
         </Grid>
       )}
       <div style={{ mb: 4 }}>
-        {showPreview && entityData.fileName && <MemoizedPreviewTable tableData={data} showrowscount showhash />}
+        {showPreview && entityData.fileName && (
+          <MemoizedPreviewTable tableData={data} showrowscount showhash />
+        )}
       </div>
     </Container>
   );
 };
-export default PersonnelRelationshipForm;
+
+export default ClientEngagementForm;

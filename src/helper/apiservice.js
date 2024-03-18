@@ -17,6 +17,7 @@ const apiservice = {
     return response;
   },
   getresultsummary: async function (filter) {
+    console.log(filter);
     let response = await apiCrud.getData(apiurl + 'resultsummary', {
       filter: filter,
     });
