@@ -114,6 +114,10 @@ const PersonnelRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Member Firm</InputLabel>
             <TextField
+              inputProps={{
+                id: 'memberFirmSelect',
+                'data-testid': 'memberFirmSelect',
+              }}
               select
               fullWidth
               id='memberFirm'
@@ -134,6 +138,10 @@ const PersonnelRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received From</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedFrom',
+                'data-testid': 'receivedFrom',
+              }}
               margin='normal'
               fullWidth
               id='receivedFrom'
@@ -148,6 +156,10 @@ const PersonnelRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Processed By</InputLabel>
             <TextField
+              inputProps={{
+                id: 'processedBy',
+                'data-testid': 'processedBy',
+              }}
               margin='normal'
               select
               fullWidth
@@ -168,6 +180,10 @@ const PersonnelRelationshipForm = () => {
           <FormControl fullWidth sx={{ marginBottom: '1%' }}>
             <InputLabel shrink>Received Date</InputLabel>
             <TextField
+              inputProps={{
+                id: 'receivedDate',
+                'data-testid': 'receivedDate',
+              }}
               margin='normal'
               fullWidth
               id='receivedDate'
@@ -216,6 +232,7 @@ const PersonnelRelationshipForm = () => {
               <Typography
                 variant='body1'
                 sx={{ flexGrow: 2, textAlign: 'left' }}
+                data-testid='filechosen'
               >
                 {entityData.fileName || 'No file chosen'}
               </Typography>

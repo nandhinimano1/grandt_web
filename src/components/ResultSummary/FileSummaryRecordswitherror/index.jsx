@@ -4,7 +4,7 @@ import { Container, Grid, Button, Typography, Divider } from '@mui/material';
 import '../ResultSummary.css';
 import PreviewTable from '../../PreviewTable';
 import Filter from '../Filter';
-import WarningsErrorsFound from '../WarningsErrorsFound/WarningsErrorsFound';
+import WarningsErrorsFound from '../WarningsErrorsFound';
 
 const MemoizedPreviewTable = memo(PreviewTable);
 const warningsErrors = [
