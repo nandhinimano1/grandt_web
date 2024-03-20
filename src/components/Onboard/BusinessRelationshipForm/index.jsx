@@ -88,8 +88,7 @@ const BusinessRelationshipForm = () => {
         });
         alert('Data submitted successfully');
       } catch (error) {
-        console.log(error);
-        alert(error);
+        //  console.error(error);
       }
     } else {
       setFileError(true);
@@ -120,7 +119,7 @@ const BusinessRelationshipForm = () => {
               id='memberFirm'
               name='memberFirm'
               value={entityData.memberFirm}
-              onChange={(e) => handleInputChange(e)}
+              onChange={handleInputChange}
               margin='normal'
               variant='outlined'
               required

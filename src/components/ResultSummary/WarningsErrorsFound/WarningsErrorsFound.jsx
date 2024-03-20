@@ -7,10 +7,18 @@ function WarningsErrorsFound({ warningsErrors, onSelect }) {
     <Paper style={{ padding: '10px', marginTop: '20px', marginBottom: '20px' }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <List component='nav' style={{ maxHeight: '120px', overflow: 'scroll' }}>
+          <List
+            component='nav'
+            style={{ maxHeight: '120px', overflow: 'scroll' }}
+          >
             {warningsErrors.map((warningError, index) => (
-              <ListItem key={warningError} onClick={() => onSelect(warningError)}>
-                <ListItemText primary={`${warningError.code} - ${warningError.message}`} />
+              <ListItem
+                key={warningError.code}
+                onClick={() => onSelect(warningError)}
+              >
+                <ListItemText
+                  primary={`${warningError.code} - ${warningError.message}`}
+                />
               </ListItem>
             ))}
           </List>

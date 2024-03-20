@@ -25,7 +25,7 @@ function Filter(props) {
   const [memberFirms, setMemberFirms] = useState([]);
 
   const handleSubmit = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const getMemberFirm = async () => {
@@ -33,10 +33,9 @@ function Filter(props) {
       await apiservice
         .getmemberfirm()
         .then((response) => setMemberFirms(response.data))
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } catch (error) {
-      console.log(error);
-      alert(error);
+      //  console.error(error);
     }
   };
 
@@ -57,6 +56,10 @@ function Filter(props) {
             <FormControl fullWidth sx={{ marginBottom: '1%' }}>
               <InputLabel shrink>Member Firm</InputLabel>
               <TextField
+                inputProps={{
+                  id: 'memberFirmSelect',
+                  'data-testid': 'memberFirmSelect',
+                }}
                 select
                 fullWidth
                 id='memberFirm'
@@ -78,6 +81,10 @@ function Filter(props) {
             <FormControl fullWidth sx={{ marginBottom: '1%' }}>
               <InputLabel shrink>Received From</InputLabel>
               <TextField
+                inputProps={{
+                  id: 'receivedFrom',
+                  'data-testid': 'receivedFrom',
+                }}
                 margin='normal'
                 fullWidth
                 id='receivedFrom'
@@ -93,6 +100,10 @@ function Filter(props) {
             <FormControl fullWidth sx={{ marginBottom: '1%' }}>
               <InputLabel shrink>Date from</InputLabel>
               <TextField
+                inputProps={{
+                  id: 'datefrom',
+                  'data-testid': 'datefrom',
+                }}
                 margin='normal'
                 fullWidth
                 id='datefrom'
@@ -111,6 +122,11 @@ function Filter(props) {
             <FormControl fullWidth sx={{ marginBottom: '1%' }}>
               <InputLabel shrink>Date to</InputLabel>
               <TextField
+                inputProps={{
+                  id: 'dateto',
+                  'data-testid': 'dateto',
+                  min: entityData.from,
+                }}
                 margin='normal'
                 fullWidth
                 id='dateto'
@@ -121,9 +137,6 @@ function Filter(props) {
                 type='date'
                 InputLabelProps={{
                   shrink: true,
-                }}
-                inputProps={{
-                  min: entityData.from,
                 }}
               />
             </FormControl>
@@ -152,7 +165,13 @@ function Filter(props) {
                   <FormControlLabel
                     key={`index${label}`}
                     value={value}
-                    control={<Radio />}
+                    control={
+                      <Radio
+                        inputProps={{
+                          'data-testid': `radio-button-${value}`,
+                        }}
+                      />
+                    }
                     label={label}
                   />
                 ))}

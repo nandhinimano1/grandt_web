@@ -34,10 +34,9 @@ const ClientEngagementForm = () => {
       await apiservice
         .getmemberfirm()
         .then((response) => setMemberFirms(response.data))
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } catch (error) {
-      console.log(error);
-      alert(error);
+      //  console.error(error);
     }
   };
 
@@ -46,11 +45,9 @@ const ClientEngagementForm = () => {
       await apiservice
         .getprocessedby(memberFirm)
         .then((response) => setProcessedBy(response.data))
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } catch (error) {
-      console.log(error);
-
-      alert(error);
+      //  console.error(error);
     }
   };
 
@@ -95,8 +92,7 @@ const ClientEngagementForm = () => {
         });
         alert('Data submitted successfully');
       } catch (error) {
-        console.log(error);
-        alert(error);
+        //  console.error(error);
       }
     } else {
       setFileError(true);

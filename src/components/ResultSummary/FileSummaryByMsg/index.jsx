@@ -26,7 +26,6 @@ function FileSummaryByMsg(props) {
     radioGroup,
   } = props;
   const [msgType, setMsgType] = useState('all');
-
   return (
     <Container component='main'>
       <Grid container spacing={5} marginBottom={8}>
@@ -103,9 +102,15 @@ function FileSummaryByMsg(props) {
                 { value: 'errors', label: 'Errors' },
               ].map(({ label, value }, index) => (
                 <FormControlLabel
-                  key={`radio-${label}`}
+                  key={`radio-${value}`}
                   value={value}
-                  control={<Radio />}
+                  control={
+                    <Radio
+                      inputProps={{
+                        'data-testid': `radio-button-${value}`,
+                      }}
+                    />
+                  }
                   label={label}
                 />
               ))}

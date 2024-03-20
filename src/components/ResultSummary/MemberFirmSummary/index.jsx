@@ -30,10 +30,9 @@ function MemberFirmSummary(props) {
         .then((response) => {
           setRcvd(response.data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } catch (error) {
-      console.log(error);
-      alert(error);
+      //  console.error(error);
     }
   };
 
@@ -59,10 +58,9 @@ function MemberFirmSummary(props) {
             );
             setFilescount([aggregatedData]);
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.error(error));
       } catch (error) {
-        console.log(error);
-        alert(error);
+        //  console.error(error);
       }
     };
     getresultSummary();

@@ -21,18 +21,14 @@ function MemberFirmLevelResults(props) {
 
   const getresultSummary = useCallback(async () => {
     try {
-      await apiservice
-        .getresultsummary(filetype)
-        .then((response) => {
-          let responseData = response.data;
-          setFiletypedetailsView(
-            responseData.find((i) => i.type === filetype)?.details
-          );
-        })
-        .catch((error) => console.log(error));
+      await apiservice.getresultsummary(filetype).then((response) => {
+        let responseData = response.data;
+        setFiletypedetailsView(
+          responseData.find((i) => i.type === filetype)?.details
+        );
+      });
     } catch (error) {
-      console.log(error);
-      alert(error);
+      //  console.error(error);
     }
   }, [filetype]);
 

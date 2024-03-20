@@ -84,9 +84,13 @@ function PreviewTable({
         </TableHead>
         <TableBody>
           {filteredTableData.map((row, rowIndex) => (
-            <TableRow key={`row_${rowIndex}`}>
+            <TableRow key={`row-hash#-${row + row[headers[0]]}`}>
               {showhash && (
-                <TableCell component='th' scope='row'>
+                <TableCell
+                  component='th'
+                  scope='row'
+                  data-testid={`hash-${rowIndex + 1}`}
+                >
                   {rowIndex + 1}
                 </TableCell>
               )}
@@ -115,7 +119,10 @@ function PreviewTable({
                     (navigation && header === headers[0])
                   ) {
                     return (
-                      <TableCell key={`${rowIndex}_${header}`}>
+                      <TableCell
+                        key={`${rowIndex}_${header}`}
+                        data-testid={`cellContent_${rowIndex}_${header}`}
+                      >
                         <button
                           style={{
                             textDecoration: 'underline',
@@ -137,7 +144,10 @@ function PreviewTable({
                     );
                   }
                   return (
-                    <TableCell key={`${rowIndex}_${header}`}>
+                    <TableCell
+                      key={`${rowIndex}_${header}`}
+                      data-testid={`cellContents_${rowIndex}_${header}`}
+                    >
                       {cellContent}
                     </TableCell>
                   );

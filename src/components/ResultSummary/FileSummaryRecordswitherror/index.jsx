@@ -10,12 +10,8 @@ const MemoizedPreviewTable = memo(PreviewTable);
 const warningsErrors = [
   { code: 'DRC-323', message: 'Country field should match the valid ISO list' },
   { code: 'DRC-100', message: 'Required field is missing' },
-  { code: 'DRC-101', message: '' },
-  { code: 'DRC-102', message: '' },
-  { code: 'DRC-103', message: '' },
-  { code: 'DRC-104', message: '' },
-  { code: 'DRC-105', message: '' },
-  { code: 'DRC-106', message: '' },
+  { code: 'DRC-101', message: 'Some other message' },
+  { code: 'DRC-102', message: 'Another message' },
 ];
 function FileSummaryRecordswitherror(props) {
   const {
@@ -28,7 +24,7 @@ function FileSummaryRecordswitherror(props) {
   } = props;
 
   const handleSelect = (warningError) => {
-    console.log(warningError);
+    console.warn(warningError);
   };
   return (
     <Container component='main'>
@@ -88,7 +84,7 @@ function FileSummaryRecordswitherror(props) {
               onSelect={handleSelect}
             />
           </Grid>
-          <Grid ite xs={1}></Grid>
+          <Grid item xs={1}></Grid>
           <Grid item xs={3}>
             <Button variant='contained' color='primary' onClick={() => {}}>
               Refresh List

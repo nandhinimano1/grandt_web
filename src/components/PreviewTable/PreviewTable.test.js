@@ -23,32 +23,31 @@ describe('PreviewTable', () => {
 
   it('renders the hash column when showhash is true', () => {
     render(<PreviewTable tableData={sampleTableData} showhash />);
-
     expect(screen.getByText('#')).toBeInTheDocument();
-    expect(screen.getByText(1)).toBeInTheDocument();
-    expect(screen.getByText(2)).toBeInTheDocument();
-    expect(screen.getByText(3)).toBeInTheDocument();
+    expect(screen.getByTestId('hash-1')).toBeInTheDocument();
+    expect(screen.getByTestId('hash-2')).toBeInTheDocument();
+    expect(screen.getByTestId('hash-3')).toBeInTheDocument();
   });
 
-  // test('renders the row count when showrowscount is true', () => {
-  //   render(<PreviewTable tableData={sampleTableData} showrowscount />);
+  it('renders the row count when showrowscount is true', () => {
+    render(<PreviewTable tableData={sampleTableData} showrowscount />);
 
-  //   expect(screen.getByText('3 Rows (including header)')).toBeInTheDocument();
-  // });
+    expect(screen.getByText('3 Rows (including header)')).toBeInTheDocument();
+  });
 
-  // test('handles editable fields correctly', () => {
-  //   render(
-  //     <PreviewTable tableData={sampleTableData} editableFields={['name']} />
-  //   );
+  it('handles editable fields correctly', () => {
+    render(
+      <PreviewTable tableData={sampleTableData} editableFields={['name']} />
+    );
 
-  //   fireEvent.click(screen.getByText('Alice'));
+    fireEvent.click(screen.getByText('Alice'));
 
-  //   const input = screen.getByDisplayValue('Alice');
-  //   expect(input).toBeInTheDocument();
+    const input = screen.getByDisplayValue('Alice');
+    expect(input).toBeInTheDocument();
 
-  //   fireEvent.change(input, { target: { value: 'Alice Updated' } });
-  //   fireEvent.blur(input);
+    fireEvent.change(input, { target: { value: 'Alice Updated' } });
+    fireEvent.blur(input);
 
-  //   expect(screen.getByText('Alice Updated')).toBeInTheDocument();
-  // });
+    expect(screen.getByText('Alice Updated')).toBeInTheDocument();
+  });
 });
