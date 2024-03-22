@@ -1,8 +1,8 @@
 /* eslint-disable testing-library/no-wait-for-side-effects */
 import { render, screen, fireEvent } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
-import EntityForm from '.';
-import apiservice from '../../../helper/apiservice';
+import EntityForm from '../components/Onboard/EntityForm';
+import apiservice from '../helper/apiservice';
 
 jest.mock('../../../helper/apiservice');
 

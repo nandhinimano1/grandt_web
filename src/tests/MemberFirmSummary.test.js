@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
-import MemberFirmSummary from '.';
-import apiservice from '../../../helper/apiservice';
-import PreviewTable from '../../PreviewTable';
-import Filter from '../Filter';
+import MemberFirmSummary from '../components/ResultSummary/MemberFirmSummary';
+import apiservice from '../helper/apiservice';
+import PreviewTable from '../components/PreviewTable';
+import Filter from '../components/ResultSummary/Filter';
 
 jest.mock('../../../helper/apiservice', () => ({
   getrcvd: jest.fn().mockResolvedValue({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Header from '.';
+import Header from '../components/Header';
 
 describe('Header component', () => {
   const mockHandleDrawerToggle = jest.fn();

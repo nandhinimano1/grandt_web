@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import FileSummaryByMsg from './';
+import FileSummaryByMsg from '../components/ResultSummary/FileSummaryByMsg';
 
 describe('FileSummaryByMsg', () => {
   const mockSetRenderComponent = jest.fn();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import PreviewTable from './';
+import PreviewTable from '../components/PreviewTable';
 
 const sampleTableData = [
   { id: 1, name: 'Alice', age: 30 },

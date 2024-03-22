@@ -1,8 +1,8 @@
 /* eslint-disable testing-library/no-wait-for-side-effects */
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import apiservice from '../../../helper/apiservice';
-import ClientEngagementForm from './';
-
+import apiservice from '../helper/apiservice';
+import PersonnelRelationshipForm from '../components/Onboard/PersonnelRelationshipForm';
 jest.mock('../../../helper/apiservice');
 
 beforeEach(() => {
@@ -12,12 +12,12 @@ beforeEach(() => {
   apiservice.postentityData.mockResolvedValue({});
 });
 
-describe('<ClientEngagementForm />', () => {
+describe('<PersonnelRelationshipForm />', () => {
   it('Should render the form with initial values', async () => {
     const memberFirmsData = ['Firm1', 'Firm2'];
     apiservice.getmemberfirm.mockResolvedValue({ data: memberFirmsData });
 
-    render(<ClientEngagementForm />);
+    render(<PersonnelRelationshipForm />);
     await waitFor(() => {
       expect(screen.getByTestId('memberFirmSelect')).toHaveValue('');
     });
@@ -31,7 +31,7 @@ describe('<ClientEngagementForm />', () => {
   });
 
   it('Should update member firm value on change', async () => {
-    render(<ClientEngagementForm />);
+    render(<PersonnelRelationshipForm />);
     const memberFirmSelect = screen.getByTestId('memberFirmSelect');
     await waitFor(() => {
       fireEvent.change(memberFirmSelect, { target: { value: 'Firm1' } });
@@ -42,7 +42,7 @@ describe('<ClientEngagementForm />', () => {
     });
   });
   it('Should update Received From value on change', async () => {
-    render(<ClientEngagementForm />);
+    render(<PersonnelRelationshipForm />);
     const receivedFromInput = screen.getByTestId('receivedFrom');
     await waitFor(() => {
       fireEvent.change(receivedFromInput, {
@@ -55,7 +55,7 @@ describe('<ClientEngagementForm />', () => {
     });
   });
   it('Should update Processed By Input value on change', async () => {
-    render(<ClientEngagementForm />);
+    render(<PersonnelRelationshipForm />);
     const processedByInput = screen.getByTestId('processedBy');
     await waitFor(() => {
       fireEvent.change(processedByInput, {
@@ -68,7 +68,7 @@ describe('<ClientEngagementForm />', () => {
     });
   });
   it('Should update Received Date value on change', async () => {
-    render(<ClientEngagementForm />);
+    render(<PersonnelRelationshipForm />);
     const receivedDate = screen.getByTestId('receivedDate');
     await waitFor(() => {
       fireEvent.change(receivedDate, {

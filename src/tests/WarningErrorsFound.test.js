@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import WarningsErrorsFound from '.';
+import WarningsErrorsFound from '../components/ResultSummary/WarningsErrorsFound';
 
 describe('WarningsErrorsFound', () => {
   const warningsErrors = [

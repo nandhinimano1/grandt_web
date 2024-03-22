@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Dashboard from '.';
+import Dashboard from '../components/Dashboard';
 
 describe('Dashboard Component', () => {
   it('renders without crashing', () => {

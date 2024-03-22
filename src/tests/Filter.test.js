@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Filter from '.';
+import Filter from '../components/ResultSummary/Filter';
 
 describe('Filter component', () => {
   let mockHandleInputChange;
