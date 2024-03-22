@@ -1,8 +1,8 @@
 /* eslint-disable testing-library/no-wait-for-side-effects */
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import apiservice from '../../../helper/apiservice';
 import PersonnelRelationshipForm from './';
-
 jest.mock('../../../helper/apiservice');
 
 beforeEach(() => {
